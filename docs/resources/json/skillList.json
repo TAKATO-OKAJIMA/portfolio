@@ -1,0 +1,41 @@
+[
+    {
+      "categoryName": "使用可能言語",
+      "names": [
+        "Java",
+        "Python",
+        "C#",
+        "JavaScript",
+        "HTML5"
+      ]
+    },
+    {
+      "categoryName": "資格",
+      "names": [
+        "ITパスポート",
+        "基本情報技術者",
+        "応用情報技術者",
+        "高等学校教諭一種免許状(工業)",
+        "高等学校教諭一種免許状(情報)"
+      ]
+    },
+    {
+        "categoryName": "開発環境",
+        "names": [
+            "Eclipse",
+            "Microsoft Visual Studio",
+            "VSCode",
+            "Git",
+            "Unity",
+            "Anaconda"
+        ]
+    },
+    {
+        "categoryName": "ライブラリ",
+        "names": [
+            "OpenCV",
+            "Selenium",
+            "BeautifulSoup"
+        ]
+    }
+]
