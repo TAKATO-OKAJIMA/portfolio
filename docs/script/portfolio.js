@@ -13,8 +13,38 @@ const sliceByNumber = (array, number) => {
                                     array.slice(i * number, (i + 1) * number)
                                  );
 
-    return slicedArray
-}
+    return slicedArray;
+};
+
+
+/**
+ * 
+ * @param {Array} array 
+ */
+const shuffleArray = (array) => {
+    for(let index = array.length - 1; index > 0; index--) {
+        const target = Math.floor(Math.random() * (index + 1));
+        [array[index], array[target]] = [array[target], array[index]];
+    }
+};
+
+
+/**
+ * 
+ * @param {Array} array
+ * @returns {any} dictionary  
+ */
+const countArrayElements = (array) => {
+    const mostCommons = array.reduce(
+        (prev, curr) => ({
+            ...prev,
+            [curr]: 1 + (prev[curr] || 0),
+        }),
+        {}
+    );
+
+    return mostCommons;
+};
 
 
 /**
@@ -33,7 +63,22 @@ const getURLParamsDictionary = (href) => {
     }
 
     return paramsDictionary;
-}
+};
+
+
+/**
+ * 
+ * @param {string | URL} baseURL 
+ * @param {string} targetURL 
+ * @param {string} markDownID 
+ * @returns {string} url
+ */
+const createURL = (baseURL, targetURL, markDownID) => {
+    const url = new URL(targetURL, baseURL);
+    url.searchParams.append('markDownID', markDownID);
+
+    return url.toString()
+};
 
 
 /**
@@ -49,15 +94,39 @@ const loadJson = async (path) => {
     const jsonData = await response.json();
 
     return jsonData;
+};
+
+
+const loadJsonFromOrigin = async(path) => {
+    const joinedPath = new URL(path, window.location.origin).toString();
+
+    const jsonData = loadJson(joinedPath);
+
+    return jsonData;
 }
 
 
+/**
+ * 
+ * @param {string} path 
+ * @returns {string} markDown
+ */
 const loadMarkDown = async(path) => {
+
     const response = await fetch(path)
                                 .catch(err => {
                                     console.error(err);
                                 });
     const markDown = await response.text();
+
+    return markDown;
+};
+
+
+const loadMarkDownFromOrigin = async(path) => {
+    const joinedPath = new URL(path, window.location.origin).toString();
+
+    const markDown = loadMarkDown(joinedPath);
 
     return markDown;
 }
@@ -71,7 +140,7 @@ const removeAllChildNodes = (element) => {
     while(element.firstChild) {
         element.removeChild(element.firstChild);
     }
-}
+};
 
 
 /**
@@ -85,7 +154,7 @@ const renderEmptyColElement = (colWidth) => {
     emptyColElement.setAttribute('class', 'col-md-' + colWidth);
 
     return emptyColElement;
-}
+};
 
 
 /**
@@ -133,4 +202,28 @@ const renderSkills = (jsonData, element) => {
     }
 
     element.appendChild(rowElement);
-}
+};
+
+
+/**
+ * 
+ * @param {string} baseURL
+ * @param {string} targetURL
+ * @param {Array<any>} jsonData 
+ * @param {Array<HTMLElement>} elements 
+ */
+const setWorksCaptions = (baseURL, targetURL, jsonData, elements) => {
+    shuffleArray(jsonData);
+    const worksData = jsonData.slice(0, 3);
+
+    for(let [index, workData] of worksData.entries()) {
+        const element = elements[index];
+
+        const anchorElement = element.getElementsByTagName('a')[0];
+        anchorElement.setAttribute('href', createURL(baseURL, targetURL, workData.markDownID));
+
+        const imageElement = anchorElement.getElementsByTagName('img')[0];
+        imageElement.setAttribute('src', workData.captionImage);
+        imageElement.setAttribute('alt', workData.title);
+    }
+};

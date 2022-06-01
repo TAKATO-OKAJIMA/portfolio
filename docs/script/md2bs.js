@@ -28,7 +28,7 @@ class MarkDownBootstrapConvertor {
         const mdDocument = this.createElementFromString(parsedMarkDown);
         this.convertImageElements(mdDocument.getElementsByTagName('img'));
 
-        return mdDocument.body.childNodes
+        return mdDocument.body.childNodes;
     }
 
     /**
@@ -99,7 +99,7 @@ class MarkDownBootstrapConvertor {
      */
     convertTableRowHeaderElements(tableRowHeaderElements) {
         for(let tableSectionHeaderElement of tableRowHeaderElements) {
-            this.convertTableRowHeaderElement(tableSectionHeaderElement)
+            this.convertTableRowHeaderElement(tableSectionHeaderElement);
         }
     }
 
@@ -108,6 +108,6 @@ class MarkDownBootstrapConvertor {
      * @param {HTMLTableCellElement} tableColHeaderElement 
      */
     convertTableColHeaderElement(tableColHeaderElement) {
-        tableColHeaderElement.setAttribute('scope', 'col')
+        tableColHeaderElement.setAttribute('scope', 'col');
     }
 }

@@ -1,0 +1,19 @@
+[
+    {
+        "title": "imglog",
+        "captionImage": "./resources/images/imglog_caption.png",
+        "markDownID": "00000001",
+        "useEnvironments": [
+            "VSCode",
+            "Git",
+            "Anaconda"
+        ],
+        "useLanguage": [
+            "Python 3"
+        ],
+        "useLibraries": [
+            "numpy",
+            "Pillow"
+        ]
+    }
+]
