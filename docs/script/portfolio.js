@@ -54,7 +54,7 @@ const getRootLocation = () => {
         const pathName = window.location.pathname;
         const rootPath = pathName.split('/')[1];
 
-        return new URL(`./${rootPath}`, window.location.origin).toString();
+        return concatAndResolveUrl(window.location.origin, `./${rootPath}`);
     }
     else {
         return window.location.origin;
@@ -175,6 +175,8 @@ const loadMarkDown = async(path) => {
 
 
 const loadMarkDownFromOrigin = async(path) => {
+    console.log(path);
+    console.log(getRootLocation())
     const joinedPath = concatAndResolveUrl(getRootLocation(), path);
 
     const markDown = await loadMarkDown(joinedPath);
