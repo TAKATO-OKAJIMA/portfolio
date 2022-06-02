@@ -47,7 +47,7 @@ const countArrayElements = (array) => {
 };
 
 
-const getRootURL = () => {
+const getRootLocation = () => {
     const hostName = window.location.hostname;
     
     if(hostName.indexOf('localhost') > -1) {
@@ -114,7 +114,7 @@ const loadJson = async (path) => {
 
 
 const loadJsonFromOrigin = async(path) => {
-    const joinedPath = new URL(path, getRootURL()).toString();
+    const joinedPath = new URL(path, getRootLocation()).toString();
 
     const jsonData = await loadJson(joinedPath);
 
@@ -148,7 +148,7 @@ const loadMarkDown = async(path) => {
 
 
 const loadMarkDownFromOrigin = async(path) => {
-    const joinedPath = new URL(path, getRootURL()).toString();
+    const joinedPath = new URL(path, getRootLocation()).toString();
 
     const markDown = await loadMarkDown(joinedPath);
 
@@ -260,7 +260,7 @@ const setWorksCaptions = (baseURL, targetURL, jsonData, elements) => {
  */
 const renderWorkList = (ctx, jsonData) => {
     const elementArray = new Array();
-    const urlOrigin = getRootURL();
+    const urlOrigin = getRootLocation();
     
     for(let work of jsonData) {
         const topLevelRowElement = document.createElement('div');
