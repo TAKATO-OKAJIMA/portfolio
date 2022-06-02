@@ -63,6 +63,33 @@ const getRootLocation = () => {
 }
 
 
+const concatAndResolveUrl = (url, concat) => {
+    let url1 = url.split('/');
+    let url2 = concat.split('/');
+    let url3 = [ ];
+    for (let i = 0, l = url1.length; i < l; i ++) {
+      if (url1[i] == '..') {
+        url3.pop();
+      } else if (url1[i] == '.') {
+        continue;
+      } else {
+        url3.push(url1[i]);
+      }
+    }
+    for (let j = 0, l = url2.length; j < l; j ++) {
+      if (url2[j] == '..') {
+        url3.pop();
+      } else if (url2[j] == '.') {
+        continue;
+      } else {
+        url3.push(url2[j]);
+      }
+    }
+    return url3.join('/');
+  }
+
+
+
 /**
  * 
  * @param {string} href 
@@ -90,7 +117,7 @@ const getURLParamsDictionary = (href) => {
  * @returns {string} url
  */
 const createURL = (baseURL, targetURL, id) => {
-    const url = new URL(targetURL, baseURL);
+    const url = new URL(concatAndResolveUrl(baseURL, targetURL));
     url.searchParams.append('id', id);
 
     return url.toString()
@@ -114,7 +141,7 @@ const loadJson = async (path) => {
 
 
 const loadJsonFromOrigin = async(path) => {
-    const joinedPath = new URL(path, getRootLocation()).toString();
+    const joinedPath = concatAndResolveUrl(getRootLocation(), path);
 
     const jsonData = await loadJson(joinedPath);
 
@@ -148,7 +175,7 @@ const loadMarkDown = async(path) => {
 
 
 const loadMarkDownFromOrigin = async(path) => {
-    const joinedPath = new URL(path, getRootLocation()).toString();
+    const joinedPath = concatAndResolveUrl(getRootLocation(), path);
 
     const markDown = await loadMarkDown(joinedPath);
 
@@ -271,7 +298,7 @@ const renderWorkList = (ctx, jsonData) => {
 
         const imgElement = document.createElement('img');
         imgElement.classList.add('img-fluid', 'border', 'h-100');
-        imgElement.setAttribute('src', new URL(work.captionImage, urlOrigin).toString());
+        imgElement.setAttribute('src', concatAndResolveUrl(urlOrigin, work.captionImage));
 
         imgColElement.appendChild(imgElement);
         topLevelRowElement.appendChild(imgColElement);
