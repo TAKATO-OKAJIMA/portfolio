@@ -1,8 +1,17 @@
+class IMarkDownConvertor {
+    constructor(markdownParser) {
+
+    }
+
+    convert(markDown) {
+
+    }
+}
+
+
 class MarkDownBootstrapConvertor {
 
     constructor(markdownParser) {
-        await markdownParser.ready;
-
         this.markdownParser = markdownParser;
     }
 
@@ -26,6 +35,12 @@ class MarkDownBootstrapConvertor {
     convert(markdownString){
         const parsedMarkDown = this.markdownParser.parse(markdownString);
         const mdDocument = this.createElementFromString(parsedMarkDown);
+
+        this.convertAnchorElements(mdDocument.getElementsByTagName('a'));
+        this.convertTableElements(mdDocument.getElementsByTagName('table'));
+        this.convertTableColHeaderElements(mdDocument.querySelectorAll('thead tr th'));
+        this.convertTableRowHeaderElements(mdDocument.querySelectorAll('tbody tr th'));
+        this.convertTableDataElements(mdDocument.getElementsByTagName('td'));
         this.convertImageElements(mdDocument.getElementsByTagName('img'));
 
         return mdDocument.body.childNodes;
@@ -109,5 +124,77 @@ class MarkDownBootstrapConvertor {
      */
     convertTableColHeaderElement(tableColHeaderElement) {
         tableColHeaderElement.setAttribute('scope', 'col');
+    }
+
+    /**
+     * 
+     * @param {HTMLCollectionOf<HTMLTableCellElement>} tableColHeaderElements 
+     */
+    convertTableColHeaderElements(tableColHeaderElements) {
+        for(let tableColHeaderElement of tableColHeaderElements) {
+            this.convertTableColHeaderElement(tableColHeaderElement);
+        }
+    }
+
+    convertTableDataElement(tableDataElement) {
+        ;
+    }
+
+    convertTableDataElements(tableDataElements) {
+        for(let tableDataElement of tableDataElements) {
+            this.convertTableDataElement(tableDataElement);
+        }
+    }
+}
+
+
+class PortFolioMarkDownConvertor extends MarkDownBootstrapConvertor {
+
+    constructor(markdownParser) {
+        super(markdownParser);
+    }
+
+    convertImageElement(imgElement) {
+        super.convertImageElement(imgElement);
+        imgElement.classList.add('shadow-sm')
+    }
+
+    /**
+     * 
+     * @param {HTMLTableElement} tableElement 
+     */
+    convertTableElement(tableElement) {
+        const rowElement = document.createElement('div');
+        rowElement.classList.add('row');
+
+        const colElement = document.createElement('div');
+        colElement.classList.add('col-md-8');
+
+        super.convertTableElement(tableElement);
+
+        const parentElement = tableElement.parentElement;
+
+        parentElement.replaceChild(rowElement, tableElement);
+
+        colElement.appendChild(tableElement);
+        rowElement.appendChild(colElement);
+
+
+        console.log(tableElement)
+    }
+
+    convertTableColHeaderElement(tableColHeaderElement) {
+        super.convertTableColHeaderElement(tableColHeaderElement);
+        tableColHeaderElement.classList.add('fs-5');
+    }
+
+    convertTableRowHeaderElement(tableRowHeaderElement) {
+        super.convertTableRowHeaderElement(tableRowHeaderElement);
+        tableRowHeaderElement.classList.add('fs-5');
+    }
+
+    convertTableDataElement(tableDataElement) {
+        super.convertTableDataElement(tableDataElement);
+        tableDataElement.classList.add('fs-5');
     }
 }

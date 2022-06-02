@@ -1,8 +1,9 @@
 [
     {
-        "title": "imglog",
+        "title": "IMGLOG",
         "captionImage": "./resources/images/imglog_caption.png",
-        "markDownID": "00000001",
+        "captionText": "Python 3で使用可能な画像用のロガー",
+        "id": "00000001",
         "useEnvironments": [
             "VSCode",
             "Git",
