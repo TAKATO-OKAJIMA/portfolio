@@ -203,7 +203,7 @@
         const workDictList = await loadJson('./resources/json/workList.json');
         const captionElements = document.getElementsByClassName('works-caption');
 
-        setWorksCaptions(window.location.href, './works/content.html', workDictList, captionElements);
+        setWorksCaptions(getRootLocation(), './works/content.html', workDictList, captionElements);
       });
   </script>
 </body>

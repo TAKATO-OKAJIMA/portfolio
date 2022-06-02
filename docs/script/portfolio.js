@@ -62,7 +62,12 @@ const getRootLocation = () => {
 
 }
 
-
+/**
+ * 
+ * @param {string} url 
+ * @param {string} concat 
+ * @returns 
+ */
 const concatAndResolveUrl = (url, concat) => {
     let url1 = url.split('/');
     let url2 = concat.split('/');
@@ -85,6 +90,7 @@ const concatAndResolveUrl = (url, concat) => {
         url3.push(url2[j]);
       }
     }
+    
     return url3.join('/');
   }
 
