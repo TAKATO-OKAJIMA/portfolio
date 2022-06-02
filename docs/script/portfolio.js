@@ -47,6 +47,22 @@ const countArrayElements = (array) => {
 };
 
 
+const getRootURL = () => {
+    const hostName = window.location.hostname;
+    
+    if(hostName.indexOf('localhost') > -1) {
+        const pathName = window.location.pathname;
+        const rootPath = pathName.split('/')[1];
+
+        return new URL(`./${rootPath}`, window.location.origin).toString();
+    }
+    else {
+        return window.location.origin;
+    }
+
+}
+
+
 /**
  * 
  * @param {string} href 
@@ -98,7 +114,7 @@ const loadJson = async (path) => {
 
 
 const loadJsonFromOrigin = async(path) => {
-    const joinedPath = new URL(path, window.location.origin).toString();
+    const joinedPath = new URL(path, getRootURL()).toString();
 
     const jsonData = await loadJson(joinedPath);
 
@@ -132,7 +148,7 @@ const loadMarkDown = async(path) => {
 
 
 const loadMarkDownFromOrigin = async(path) => {
-    const joinedPath = new URL(path, window.location.origin).toString();
+    const joinedPath = new URL(path, getRootURL()).toString();
 
     const markDown = await loadMarkDown(joinedPath);
 
@@ -244,7 +260,7 @@ const setWorksCaptions = (baseURL, targetURL, jsonData, elements) => {
  */
 const renderWorkList = (ctx, jsonData) => {
     const elementArray = new Array();
-    const urlOrigin = window.location.origin;
+    const urlOrigin = getRootURL();
     
     for(let work of jsonData) {
         const topLevelRowElement = document.createElement('div');
