@@ -50,7 +50,7 @@ const countArrayElements = (array) => {
 const getRootLocation = () => {
     const hostName = window.location.hostname;
     
-    if(hostName.indexOf('localhost') > -1) {
+    if(hostName.indexOf('localhost') == -1) {
         const pathName = window.location.pathname;
         const rootPath = pathName.split('/')[1];
 
@@ -142,6 +142,9 @@ const loadJson = async (path) => {
 
 const loadJsonFromOrigin = async(path) => {
     const joinedPath = concatAndResolveUrl(getRootLocation(), path);
+
+    console.log(getRootLocation());
+    console.log(path)
 
     const jsonData = await loadJson(joinedPath);
 
