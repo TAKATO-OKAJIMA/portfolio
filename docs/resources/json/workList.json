@@ -16,5 +16,23 @@
             "numpy",
             "Pillow"
         ]
+    },
+    {
+        "title": "portfolio",
+        "captionImage": "./resources/images/portfolio_caption.png",
+        "captionText": "ポートフォリオ用のWebページ",
+        "id": "00000002",
+        "useEnvironments": [
+            "VSCode",
+            "Git"
+        ],
+        "useLanguage": [
+            "HTML 5",
+            "JavaScript"
+        ],
+        "useLibraries": [
+            "Bootstrap 5",
+            "markdown.js"
+        ]
     }
 ]
