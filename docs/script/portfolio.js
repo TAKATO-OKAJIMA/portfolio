@@ -315,7 +315,7 @@ const renderWorkList = (ctx, jsonData) => {
         topLevelRowElement.appendChild(imgColElement);
 
         const contentColElement = renderEmptyColElement(8);
-        contentColElement.classList.add('pt-3', 'pb-3');
+        contentColElement.classList.add('pt-3', 'pb-3', 'd-flex', 'flex-column');
         
         const titleElement = document.createElement('h4');
         titleElement.textContent = work.title;
@@ -339,10 +339,10 @@ const renderWorkList = (ctx, jsonData) => {
         // }
 
         const buttonDivElement = document.createElement('div');
-        buttonDivElement.classList.add('d-flex', 'justify-content-end')
+        buttonDivElement.classList.add('d-flex', 'justify-content-end', 'mt-auto')
 
         const buttonAnchorElement = document.createElement('a');
-        buttonAnchorElement.classList.add('btn', 'btn-outline-secondary', 'mt-2', 'me-3');
+        buttonAnchorElement.classList.add('btn', 'btn-outline-secondary', 'mb-2', 'me-3');
         buttonAnchorElement.setAttribute('href', createURL(urlOrigin, './works/content.html', work.id));
         buttonAnchorElement.textContent = 'See More'
 
