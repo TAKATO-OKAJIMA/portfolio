@@ -149,8 +149,8 @@ const loadJson = async (path) => {
 const loadJsonFromOrigin = async(path) => {
     const joinedPath = concatAndResolveUrl(getRootLocation(), path);
 
-    console.log(getRootLocation());
-    console.log(path)
+    // console.log(getRootLocation());
+    // console.log(path)
 
     const jsonData = await loadJson(joinedPath);
 
@@ -184,8 +184,8 @@ const loadMarkDown = async(path) => {
 
 
 const loadMarkDownFromOrigin = async(path) => {
-    console.log(path);
-    console.log(getRootLocation())
+    // console.log(path);
+    // console.log(getRootLocation())
     const joinedPath = concatAndResolveUrl(getRootLocation(), path);
 
     const markDown = await loadMarkDown(joinedPath);

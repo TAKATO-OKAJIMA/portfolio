@@ -30,12 +30,14 @@ class MarkDownBootstrapConvertor {
     /**
      * 
      * @param {string} markdownString 
-     * @returns {NodeListOf<ChildNode>} bootStrapHTML
+     * @returns {HTMLCollection} bootStrapHTML
      */
     convert(markdownString){
         const parsedMarkDown = this.markdownParser.parse(markdownString);
         const mdDocument = this.createElementFromString(parsedMarkDown);
-
+        
+        this.convertHeadingElements(mdDocument.getElementsByTagName('h4'));
+        this.convertParagraphElements(mdDocument.getElementsByTagName('p'));
         this.convertAnchorElements(mdDocument.getElementsByTagName('a'));
         this.convertTableElements(mdDocument.getElementsByTagName('table'));
         this.convertTableColHeaderElements(mdDocument.querySelectorAll('thead tr th'));
@@ -44,6 +46,42 @@ class MarkDownBootstrapConvertor {
         this.convertImageElements(mdDocument.getElementsByTagName('img'));
 
         return mdDocument.body.childNodes;
+    }
+
+    /**
+     * 
+     * @param {HTMLParagraphElement} paragraphElement 
+     */
+    convertParagraphElement(paragraphElement) {
+        ;
+    }
+
+    /**
+     * 
+     * @param {HTMLCollectionOf<HTMLParagraphElement>} paragraphElements 
+     */
+    convertParagraphElements(paragraphElements){
+        for(let paragraphElement of paragraphElements) {
+            this.convertParagraphElement(paragraphElement);
+        }
+    }
+
+    /**
+     * 
+     * @param {HTMLHeadingElement} headerElement 
+     */
+    convertHeadingElement(headingElement) {
+        ;
+    }
+
+    /**
+     * 
+     * @param {HTMLCollectionOf<HTMLHeadingElement>} headingElements 
+     */
+    convertHeadingElements(headingElements) {
+        for(let headingElement of headingElements) {
+            this.convertHeadingElement(headingElement);
+        }
     }
 
     /**
@@ -154,6 +192,25 @@ class PortFolioMarkDownConvertor extends MarkDownBootstrapConvertor {
         super(markdownParser);
     }
 
+    /**
+     * 
+     * @param {HTMLHeadingElement} headingElement 
+     */
+    convertHeadingElement(headingElement) {
+        headingElement.classList.add('mt-5');
+    }
+
+    /**
+     * 
+     * @param {HTMLParagraphElement} paragraphElement 
+     */
+    convertParagraphElement(paragraphElement) {
+        if (paragraphElement.textContent != '') {
+            paragraphElement.classList.add('ms-3', 'fs-5', 'mb-0');
+    
+        }
+    }
+
     convertImageElement(imgElement) {
         super.convertImageElement(imgElement);
         imgElement.classList.add('shadow-sm')
@@ -180,7 +237,7 @@ class PortFolioMarkDownConvertor extends MarkDownBootstrapConvertor {
         rowElement.appendChild(colElement);
 
 
-        console.log(tableElement)
+       // console.log(tableElement)
     }
 
     convertTableColHeaderElement(tableColHeaderElement) {
