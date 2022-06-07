@@ -35,7 +35,9 @@
         "names": [
             "OpenCV",
             "Selenium",
-            "BeautifulSoup"
+            "BeautifulSoup",
+            "NumPy",
+            "Bootstrap 5"
         ]
     }
 ]
