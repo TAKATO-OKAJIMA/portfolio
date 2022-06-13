@@ -3,7 +3,7 @@
         "title": "IMGLOG",
         "captionImage": "./resources/images/imglog_caption.png",
         "captionText": "Python 3で使用可能な画像用のロガー",
-        "id": "00000001",
+        "id": "imglog",
         "useEnvironments": [
             "VSCode",
             "Git",
@@ -21,7 +21,7 @@
         "title": "portfolio",
         "captionImage": "./resources/images/portfolio_caption.png",
         "captionText": "ポートフォリオ用のWebページ",
-        "id": "00000002",
+        "id": "portfolio",
         "useEnvironments": [
             "VSCode",
             "Git"
